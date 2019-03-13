@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Contact</title>
+  </head>
+  <body >
+    <h1 class="text-center display-4" id="title">Contact Us</h1>
+    <main>
+      <div class="topnav">
+        <ul>
+          <a href="index.html">Home</a>
+          <a href="mission">Mission</a>
+          <a href="staff">Staff</a>
+          <a href="mentor">Mentors</a>
+          <a href="schedule">Schedule</a>
+          <a href="application">Apply</a>
+          <a href="evaluation">Evaluation</a>
+          <a href="contact">Contact</a>
+        </ul>
+      </div>
+      <div id="contact">
+        <p>
+          <i class="fa fa-envelope" style="font-size:24px"></i>
+
+          Email Us:
+          <a href="mailto:qrc@stlawu.edu">pqrc@stlawu.edu</a>
+        </p>
+        <p>
+          <i class="fa fa-phone" style="font-size:24px"></i>
+
+          Phone: 229-5035
+        </p>
+        <p>
+          <i class="fa fa-facebook-square" style="font-size:24px"></i>
+
+          Facebook:
+          <a href="https://www.facebook.com/slu.qrc?ref=ts&fref=ts">SLU QRC</a>
+        </p>
+        <p>
+          <i class="fa fa-twitter" style="font-size:24px"></i>
+
+          Follow Us on Twitter:
+          <a href="http://twitter.com/SLUQRC">Twitter</a>
+
+        </p>
+      </div>
+    </main>
+    <footer class="bg-dark fixed-bottom p-2">
+      <a href="/auth" id="log" class="text-white float-right">Log in with Google</a>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    /////////////////////////////////////////////////////////////////////////// Divider between "how it looks" and "how it works"
+
+
+      // Make a few changes to the page if the user is logged in
+      $.ajax({method: 'GET', url: '/user'})
+        .done(function(user) {
+          if (user) {
+            $('#log').attr('href', '/logout').text('Log out');
+        //    $('#new :input').prop('disabled', false);
+          }
+        });
+     </script>
+  </body>
+  </html>

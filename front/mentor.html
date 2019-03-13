@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styling.css">
+    <title>Mentor</title>
+  </head>
+  <body>
+      <h1 class="text-center display-4" id="title">Mentors</h1>
+    <main>
+    <div class="topnav">
+      <ul>
+        <a href="index.html">Home</a>
+        <a href="mission">Mission</a>
+        <a href="staff">Staff</a>
+        <a href="mentor">Mentors</a>
+        <a href="schedule">Schedule</a>
+        <a href="application">Apply</a>
+        <a href='evaluation'>Evaluation</a>
+        <a href="contact">Contact</a>
+
+      </ul>
+    </div>
+    <div id="mentors" class="container" >
+
+
+      <p class="loading">Loading mentors...</p>
+    </div>
+
+  </main>
+    <!-- Modal -->
+<div class="modal fade" id="mentorModal" tabindex="-1" role="dialog" aria-labelledby="Edit Profile" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text"  class="form-control" id="name" />
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Majors:</label>
+            <input type="text" class="form-control" id="majors" />
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Minors:</label>
+            <input type="text" class="form-control" id="minors" />
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Courses:</label>
+            <textarea class="form-control" id="courses"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary submit">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="crtmntrModal" tabindex="-1" role="dialog" aria-labelledby="Edit Profile" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Edit Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input type="text"  class="form-control" id="name" />
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Majors:</label>
+            <input type="text" class="form-control" id="majors" />
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Minors:</label>
+            <input type="text" class="form-control" id="minors" />
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Courses:</label>
+            <textarea class="form-control" id="courses"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Google ID:</label>
+            <textarea class="form-control" id="goid"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Photo(URL):</label>
+            <textarea class="form-control" id="photo"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary submit">Add Mentor</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <footer class="bg-dark fixed-bottom p-2">
+      <a href="/auth" id="log" class="text-white float-right">Log in with Google</a>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+    //hide mentorModsal
+
+    //$('#mentorModal').hide();
+
+    // Generate an article for a comment
+    //TODO: use go id? goid?
+    const mentorArticle = function(mentor) {
+      const article = $(`
+        <div id ="${mentor.goid}" class="card float-left w-25 my-5 h-75">
+          <img style= "height: 400px" class="card-img-top" src=${mentor.photo} alt="Mentor Profile Photo">
+          <div class="card-body">
+            <h5 class="card-title">${mentor.name}</h5>
+            <p class="card-text">Major(s): <span class="majors">${mentor.majors}</span></p>
+            <p class="card-text">Minor(s): <span class="minors">${mentor.minors}</span></p>
+            <p class="card-text">Course(s): <span class="courses">${mentor.courses}</span></p>
+          </div>
+        </div>
+      `);
+      // No delete option if the user isn't the comment author
+    //   if (!self || self.id !== comment.author.id) {
+    //     article.find('.delete').remove();
+    //   }
+     return article;
+};
+    /////////////////////////////////////////////////////////////////////////// Divider between "how it looks" and "how it works"
+    //    const topic = new URLSearchParams(window.location.search).get('topic');
+        // Check if the user is logged in
+    let self = null;
+    $.ajax({method: 'GET', url: '/user'})
+      .done(function(user) {
+        self = user;
+        // Make a few changes to the page if so
+        if (self) {
+          $('#log').attr('href', '/logout').text('Log out');
+
+          // check whether user is staff
+
+        }
+        $.ajax({method: 'GET', url: '/mentors'})
+          .fail(() => $('#mentors .loading').text('Could not load mentors!'))
+          .done(function(mentors) {
+            $('#mentors .loading').remove();
+            $('#mentors').append(mentors.map(mentor => mentorArticle(mentor)));
+            if (self){
+              $(`#${self.id} .card-body`).append(
+                '<button type="button" id="editbtn" class="btn btn-primary mr-1" data-toggle="modal" data-target="#mentorModal">Edit</button>'
+              );
+
+              //TODO: fail? maybe simplify later
+              $.ajax({method:'GET',url:`/staffs/${self.id}`})
+                .done(function(result){
+                  if (result === 'yes'){
+                    $('.card-body').append('<button type="button" class="btn btn-primary delete mr-1">Delete</button>');
+                    $('#mentors').append('<div class="card float-left w-25 h-100" id="addingbtn"><button type="button" class="btn btn-light" data-toggle="modal" data-target="#crtmntrModal">Add New Mentor</button></div>');
+                  }
+                });
+
+
+              // get values from card
+
+              const name = $(`#${self.id} h5`).text();
+              const majors = $(`#${self.id} .majors`).text();
+              const minors = $(`#${self.id} .minors`).text();
+              const courses = $(`#${self.id} .courses`).text();
+
+              $('#name').val(name);
+              $('#majors').val(majors);
+              $('#minors').val(minors);
+              $('#courses').val(courses);
+            }
+
+            });
+      });
+
+      //Handle 'Delete mentors' change
+      $('#mentors').on('click','.delete', function(event){
+        console.log("in?");
+        if(confirm('Delete this mentor?')){
+          const query = $(this).parent().parent().attr('id');
+          $.ajax({method:'DELETE', url:`/mentors/${query}`})
+          .done(()=>console.log("Deleted"));
+          location.reload();
+        };
+      });
+
+      //Handle 'save changes' button
+      //TODO: lots of error handling should go on here
+      $('#mentorModal').on('click', '.submit', function(event){
+        const modal_body = $(this).closest('#mentorModal');
+
+        const body = {
+          new_name:modal_body.find('#name').val(),
+          new_majors:modal_body.find('#majors').val().split(","),
+          new_minors:modal_body.find('#minors').val().split(","),
+          new_courses:modal_body.find('#courses').val().split(","),
+        }
+        $.ajax({method: 'PATCH', url: '/mentors', data:body})
+        .fail(() => alert("cannot save changes"))
+        .done(function(response) {
+          console.log("changes made to database");
+          location.reload();
+        })
+      });
+
+      $('#crtmntrModal').on('click', '.submit', function(event){
+        const modal_body = $(this).closest('#crtmntrModal');
+
+        const body = {
+          new_name:modal_body.find('#name').val(),
+          new_majors:modal_body.find('#majors').val().split(","),
+          new_minors:modal_body.find('#minors').val().split(","),
+          new_courses:modal_body.find('#courses').val().split(","),
+          new_goid:modal_body.find('#goid').val(),
+          new_photo:modal_body.find('#photo').val(),
+        }
+        $.ajax({method: 'POST', url: '/mentors', data:body})
+        .fail(() => alert("cannot save changes"))
+        .done(function(response) {
+          console.log("changes made to database");
+          location.reload();
+        })
+      })
+
+    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>

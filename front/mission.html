@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Mission</title>
+  </head>
+  <body >
+    <h1 class="text-center display-4" id="title">Mission</h1>
+    <main>
+      <div class="topnav">
+        <ul>
+          <a href="index.html">Home</a>
+          <a href="mission">Mission</a>
+          <a href="staff">Staff</a>
+          <a href="mentor">Mentors</a>
+          <a href="schedule">Schedule</a>
+          <a href="application">Apply</a>
+          <a href="evaluation">Evaluation</a>
+          <a href="contact">Contact</a>
+        </ul>
+      </div>
+      <article class="container w-50 mt-5 missionarticle">
+        <p>
+          The Peterson Quantitative Resource Center (PQRC) was founded in August
+           2007 to provide mathematical, statistical and computational support to
+           St. Lawrence University.  The mission of the PQRC is stated below:
+        </p>
+        <p>
+The mission of the Peterson Quantitative Resource Center is to facilitate,
+encourage, and develop quantitative reasoning, skills, and applications for the
+St. Lawrence University Community.
+        </p>
+        <p>
+          The PQRC was established with three main goals in mind:
+          <ul>
+            <li>
+              1.  To support courses and coursework that is quantitative in nature across the SLU curriculum
+            </li>
+            <li>
+              2.  To assist students in improving their quantitative understanding to meet course prerequisites
+            </li>
+            <li>
+              3.  To facilitate research that involves quantitative reasoning
+            </li>
+          </ul>
+        </p>
+      </article>
+    </main>
+    <footer class="bg-dark fixed-bottom p-2">
+      <a href="/auth" id="log" class="text-white float-right">Log in with Google</a>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    /////////////////////////////////////////////////////////////////////////// Divider between "how it looks" and "how it works"
+
+
+      // Make a few changes to the page if the user is logged in
+      $.ajax({method: 'GET', url: '/user'})
+        .done(function(user) {
+          if (user) {
+            $('#log').attr('href', '/logout').text('Log out');
+        //    $('#new :input').prop('disabled', false);
+          }
+        });
+     </script>
+  </body>
+  </html>

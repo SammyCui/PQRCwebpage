@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="schedule_stylling.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Peterson Resources Quantitative Center</title>
+  </head>
+  <body >
+    <h1 class="text-center display-4" id="title">Schedule</h1>
+    <main>
+      <div class="topnav">
+        <ul>
+          <a class="home" href="index.html">Home</a>
+          <a href="mission">Mission</a>
+          <a href="staff">Staff</a>
+          <a href="mentor">Mentors</a>
+          <a href="schedule">Schedule</a>
+          <a href="application">Apply</a>
+          <a href='evaluation'>Evaluation</a>
+          <a href="contact">Contact</a>
+        </ul>
+      </div>
+
+      <!--Autocomplete Search Box to filter shift by course-->
+      <form  id='searchbox' autocomplete="off" action="#">
+        <div class="autocomplete" style="width:300px;">
+          <input id="myInput" type="text" placeholder="I need help with...">
+        </div>
+        <button id='filter' type='click'>Search</button>
+      </form>
+
+      <!--Schedule Box-->
+      <div class="cd-schedule loading">
+      	<div class="timeline">
+      		<ul>
+      		</ul>
+      	</div>
+      	<div class="events">
+      		<ul id = 'box'>
+      		</ul>
+      	</div>
+      </div>
+    </main>
+    <footer class="bg-dark fixed-bottom p-2">
+      <a href="/auth" id="log" class="text-white float-right">Log in with Google</a>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+      // change log-in footer to logout if user is logged in
+      $.ajax({method: 'GET', url: '/user'})
+        .done(function(user) {
+          if (user) {
+            $('#log').attr('href', '/logout').text('Log out');
+        //    $('#new :input').prop('disabled', false);
+          }
+        });
+
+      //_______________ Autocomplete Search Box ______________________
+
+      var courses_coverage = ['CS-140 Intro to CS', 'CS-256 Data Structure', 'CS-219 Techniques to CS',
+      'CS-220 Computer Organization', 'CS-364 Programming Language', 'Math-280 Bridge to Higher Mathematics',
+    'Math-306 Complex Analysis', 'CS-374 Artificial Intelligence', 'CS-4003 Combinatorics', 'Math-305 Real Analysis'];
+
+      const autocomplete = function(inp, arr) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+        /*execute a function when someone writes in the text field:*/
+        inp.addEventListener("input", function(e) {
+            var a, b, i, val = this.value;
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!val) { return false;}
+            currentFocus = -1;
+            /*create a DIV element that will contain the items (values):*/
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            /*append the DIV element as a child of the autocomplete container:*/
+            this.parentNode.appendChild(a);
+            /*for each item in the array...*/
+            for (i = 0; i < arr.length; i++) {
+              /*check if the item starts with the same letters as the text field value:*/
+              if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                /*create a DIV element for each matching element:*/
+                b = document.createElement("DIV");
+                /*make the matching letters bold:*/
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function(e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+              }
+            }
+        });
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+              /*If the arrow DOWN key is pressed,
+              increase the currentFocus variable:*/
+              currentFocus++;
+              /*and and make the current item more visible:*/
+              addActive(x);
+            } else if (e.keyCode == 38) { //up
+              /*If the arrow UP key is pressed,
+              decrease the currentFocus variable:*/
+              currentFocus--;
+              /*and and make the current item more visible:*/
+              addActive(x);
+            } else if (e.keyCode == 13) {
+              /*If the ENTER key is pressed, prevent the form from being submitted,*/
+              e.preventDefault();
+              if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+              }
+            }
+        });
+        const addActive = function(x) {
+          /*a function to classify an item as "active":*/
+          if (!x) return false;
+          /*start by removing the "active" class on all items:*/
+          removeActive(x);
+          if (currentFocus >= x.length) currentFocus = 0;
+          if (currentFocus < 0) currentFocus = (x.length - 1);
+          /*add class "autocomplete-active":*/
+          x[currentFocus].classList.add("autocomplete-active");
+        }
+        const removeActive = function(x) {
+          /*a function to remove the "active" class from all autocomplete items:*/
+          for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+          }
+        }
+        const closeAllLists = function(elmnt) {
+          /*close all autocomplete lists in the document,
+          except the one passed as an argument:*/
+          var x = document.getElementsByClassName("autocomplete-items");
+          for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+            x[i].parentNode.removeChild(x[i]);
+          }
+        }
+      }
+      /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+
+    autocomplete(document.getElementById("myInput"), courses_coverage);
+    $('#filter').on('click', function(){
+      const boolean =$.inArray(document.getElementById("myInput").value, courses_coverage);
+
+      if (!$("#myInput").val()){
+        alert("Enter something please");
+      }
+      else if (boolean==-1){
+        alert("Sorry, we don't have mentor teaching this course");
+      }
+      $('.cell').css('background-color','transparent');
+      $('.cell').css('color','black');
+
+      const target = $("#myInput").val().split(" ")[0];
+      $(`.${target}`).css('background-color','#333');
+      $(`.${target}`).css('color', '#f2f2f2');
+    })
+
+
+
+
+      //_______________ generate schedule table ______________________
+
+      // timeline
+      let time = 10;
+      const generate_timeline = function(time){
+        while(time <= 23){
+          $('.timeline ul').append(`<li><span>${time}:00</span></li>`);
+            time++;
+          }
+      };
+
+      // weekday (1st row)
+      let dayofweek = {
+        0: 'Sunday',
+        1: 'Monday',
+        2: 'Tuesday',
+        3: 'Wednesday',
+        4: 'Thursday',
+        5: 'Friday',
+        6: 'Saturday'
+      };
+
+      const generate_col = function(){
+        for (var key in dayofweek){
+          const id = key;
+          const day = dayofweek[key];
+          $('.events #box').append(`
+            <li class="events-group">
+          			<div class="top-info" id=${id}><span>${day}</span></div>
+                <ul>
+                  <li class="10 cell">
+
+                  </li>
+
+                  <li class="11 cell">
+
+                  </li>
+                  <li class="12 cell">
+
+                  </li>
+
+                  <li class="13 cell">
+
+                  </li>
+                  <li class="14 cell">
+
+                  </li>
+
+                  <li class="15 cell">
+
+                  </li>
+                  <li class="16 cell">
+
+                  </li>
+
+                  <li class="17 cell">
+
+                  </li>
+                  <li class="18 cell">
+
+                  </li>
+
+                  <li class="19 cell">
+
+                  </li>
+                  <li class="20 cell">
+
+                  </li>
+
+                  <li class="21 cell">
+
+                  </li>
+                  <li class="22 cell">
+
+                  </li>
+
+          			</ul>
+          	</li>`);
+        }
+      };
+
+      // Assume shifts is an array of
+      // shift: {mentor.goid, mentor.name, mentor.courses, timein, timeout, dayofWeek(0-6)}
+      const generate_shifts = function(shifts){
+        const cols = $('.events-group'); // Outter <li> <\li>
+        for (var col of cols){
+          const day = $(col).find('div').attr('id');
+          time_slots = $(col).find('ul');
+
+          for (var shift of shifts){
+            if (shift.dayofweek == day){
+              const start = time_slots.find(`.${shift.timein}`); // <li class = shift.timein></li>
+              const end = time_slots.find(`.${shift.timeout}`); // <li class = shift.timeout></li>
+              fill_shift(start, shift.mentor.first);
+              add_courses(start, shift.mentor.courses);
+              // if >2 hours, fill all cells inbetween
+              const hours = start.nextUntil(end);
+              for (var hour of hours){
+                // add mentor name to <li>
+                fill_shift($(hour), shift.mentor.first);
+                // add course courage to <li class = courses...> for later highlighting
+                add_courses($(hour), shift.mentor.courses);
+              }
+            }
+          }
+        }
+      }
+
+      // Helping function: add name to cell
+      const fill_shift = function(cell, name){
+        var mentors = cell.text();
+        cell.text(mentors+name+' ');
+      }
+
+      // Helping function: store courses courage in the class of <li>
+      const add_courses = function(cell, courses){
+        const vals = cell.attr('class');
+        cell.attr('class', vals+' '+courses.join(' '));
+        console.log(cell.attr('class'));
+      }
+
+      //_______________ generate schedule table ______________________
+      generate_timeline(time);
+      generate_col();
+
+      // fetch data and fill cells
+      $.ajax({method: 'GET', url: '/shifts'})
+        .done(function(shifts) {
+          generate_shifts(shifts);
+       });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="styling.css">
+    <title>Staff</title>
+  </head>
+  <body>
+    <h1 class="text-center display-4" id="title">Staffs</h1>
+  <div class="topnav">
+    <ul>
+      <a href="index.html">Home</a>
+      <a href="mission">Mission</a>
+      <a href="staff">Staff</a>
+      <a href="mentor">Mentors</a>
+      <a href="schedule">Schedule</a>
+      <a href="application">Apply</a>
+      <a href='evaluation'>Evaluation</a>
+      <a href="contact">Contact</a>
+
+    </ul>
+  </div>
+    <main id="staff" class="container my-5">
+      <p class="loading">Loading staff...</p>
+    </main>
+    <form id="new" class="container mb-5"></form>
+    <footer class="bg-dark fixed-bottom p-2">
+      <a href="/auth" id="log" class="text-white float-right">Log in with Google</a>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+    // Generate an article for a comment
+    //TODO: use go id? goid?
+    const staffArticle = function(staff) {
+      console.log(staff); // temp
+      const article = $(`
+        <div id ="${staff.goid}" class="card float-left w-25 h-100">
+        <img style= "width:280px; height: 400px" id="image" class="card-img-top" src=${staff.photo} alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">${staff.name}</h5>
+            <p class="card-text">${staff.tags}</p>
+            <p class="card-text">${staff.email}</p>
+            <p class="card-text">${staff.cell}</p>
+            <p class="card-text">${staff.office}</p>
+          </div>
+        </div>
+      `);
+      // No delete option if the user isn't the comment author
+    //   if (!self || self.id !== comment.author.id) {
+    //     article.find('.delete').remove();
+    //   }
+     return article;
+};
+    /////////////////////////////////////////////////////////////////////////// Divider between "how it looks" and "how it works"
+//    const topic = new URLSearchParams(window.location.search).get('topic');
+     let self = null;
+     $.ajax({method: 'GET', url: '/user'})
+       .done(function(user) {
+         self = user;
+         // Make a few changes to the page if so
+         if (self) {
+           $('#log').attr('href', '/logout').text('Log out');
+         }
+
+          $.ajax({method: 'GET', url: '/staffs'})
+            .fail(() => $('#staff .loading').text('Could not load staff!'))
+            .done(function(staffs) {
+              $('#staff .loading').remove();
+              $('#staff').append(staffs.map(staff => staffArticle(staff)));
+            });
+      });
+
+
+    // if (topic) {
+    //   $('#new').append(`<textarea id="argument" placeholder="What do you think?" class="form-control my-1" required disabled></textarea>
+    //   <button type="submit" class="btn btn-primary" disabled>Submit</button>`) // Ideally this stuff is generated above the divider line
+    //   // Load the opinion from the database
+    //   $.ajax({method: 'GET', url: `/opinions/${topic}`})
+    //     .fail(() => $('#opinion .loading').text('Could not load opinion!'))
+    //     .done(function(opinion) {
+    //       $('#opinion .loading').remove();
+    //       $('#opinion').append(opinionHeader(opinion).children());
+    //     });
+    //   // Handle form submit
+    //   $('#new').on('submit', function(event) {
+    //     event.preventDefault();
+    //     const body = {
+    //       opinion_id: topic,
+    //       argument: $('#argument').val().trim(),
+    //     };
+    //     // Post a new comment
+    //     const form = this;
+    //     $.ajax({method: 'POST', url: '/comments', data: body})
+    //       .fail(() => alert('Could not submit!'))
+    //       .done(function(comment) {
+    //         $('#comments').append(commentArticle(comment));
+    //         form.reset();
+    //       });
+    //   });
+    //   // Handle clicks on delete links
+    //   $('#comments').on('click', '.delete', function(event) {
+    //     event.preventDefault();
+    //     if (confirm('Delete this comment permanently?')) {
+    //       const article = $(this).closest('article');
+    //       // Delete a comment
+    //       $.ajax({method: 'DELETE', url: `/comments/${article.attr('id')}`})
+    //         .fail(() => alert('Could not delete!'))
+    //         .done(() => article.remove());
+    //     }
+    //   });
+    // }
+    //
+    // // This would make more sense to do in index.html
+    // // Since that page is already set up to display multiple opinions
+    // const user = new URLSearchParams(window.location.search).get('user');
+    // if (user) {
+    //   $('#comments .loading').remove();
+    //   $.ajax({method: 'GET', url: '/opinions?user=' + user})
+    //     .fail(() => $('#opinion .loading').text('Could not load opinions!'))
+    //     .done(function(opinions) {
+    //       $('#opinion .loading').remove();
+    //       $('#opinion').append(opinions.map(opinion => opinionHeader(opinion)));
+    //     });
+    // }
+    </script>
+  </body>
+</html>

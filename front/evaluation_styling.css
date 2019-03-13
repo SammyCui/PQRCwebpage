@@ -1,0 +1,89 @@
+.text-center {text-align:center;}
+
+/* Rating Star Widgets Style */
+.rating-stars ul {
+  list-style-type:none;
+  padding:0;
+
+  -moz-user-select:none;
+  -webkit-user-select:none;
+}
+.rating-stars ul > li.star {
+  display:inline-block;
+
+}
+
+/* Idle State of the stars */
+.rating-stars ul > li.star > i.fa {
+  font-size:2.5em; /* Change the size of the stars */
+  color:#ccc; /* Color on idle state */
+}
+
+/* Hover state of the stars */
+.rating-stars ul > li.star.hover > i.fa {
+  color:#A21124;
+}
+
+/* Selected state of the stars */
+.rating-stars ul > li.star.selected > i.fa {
+  color:#C33140;
+}
+
+/* Hover Effects */
+
+.container {
+    position: relative;
+    width: 50%;
+}
+
+img{
+  margin-top:5%;
+  margin-bottom:10%;
+  border-radius: 14px;
+  transition-duration: 0.4s;
+  backface-visibility: hidden;
+  opacity:1;
+  width: 40%;
+  height:45%;
+}
+
+img:hover{
+  opacity: 0.3;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+#pqrc_con:hover #overlay1{
+  opacity: 1;
+}
+
+#pqrc_con:hover img{
+  opacity: 0.3;
+}
+
+#mentor_con:hover img{
+  opacity: 0.3;
+}
+
+#mentor_con:hover #overlay2{
+  opacity: 1;
+}
+
+.text {
+  border-radius: 8px;
+  background-color: #333;
+  color: white;
+  font-size: 20px;
+  font-weight:300;
+  margin:0;
+  padding:30px 60px 30px 60px;
+}

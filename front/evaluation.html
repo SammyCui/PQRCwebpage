@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="styling.css">
+    <link rel="stylesheet" href="evaluation_styling.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Evaluation</title>
+  <body >
+    <h1 class="text-center display-4" id="title">Evaluation</h1>
+    <main>
+      <div class="topnav">
+        <ul>
+          <a href="index.html">Home</a>
+          <a href="mission">Mission</a>
+          <a href="staff">Staff</a>
+          <a href="mentor">Mentors</a>
+          <a href="schedule">Schedule</a>
+          <a href="application">Apply</a>
+          <a href="evaluation">Evaluation</a>
+          <a href="contact">Contact</a>
+        </ul>
+      </div>
+    </main>
+    <div class="container">
+    <div class="row">
+     <div class="col-6 my-5" data-toggle="modal" data-target="#QRC_Eval">
+       <div class="container" id="pqrc_con">
+           <img src="https://images.ctfassets.net/cfblb1f7i85j/60ReglHD3O8wK2yimQaaIW/a8e8d5dd3203eb9d4ca6f2559372de8b/OM3.1.12_Math_5.JPG" alt="QRC Evalution" class="rounded w-100">
+           <div class="middle" id="overlay1">
+             <div class="text">
+               For PQRC
+             </div>
+           </div>
+       </div>
+     </div>
+     <div class="col-6 my-5" data-toggle="modal" data-target="#Mentor_Eval">
+       <div class="container" id="mentor_con">
+           <img src="https://images.ctfassets.net/cfblb1f7i85j/60ReglHD3O8wK2yimQaaIW/a8e8d5dd3203eb9d4ca6f2559372de8b/OM3.1.12_Math_5.JPG" alt="Mentor Evaluation" class="rounded w-100">
+           <div class="middle" id="overlay2">
+             <div class="text">For Mentor</div>
+           </div>
+       </div>
+
+     </div>
+   </div>
+ </div>
+  <div class="modal fade" id="QRC_Eval" tabindex="-1" role="dialog" aria-labelledby="Edit Profile" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Rate QRC</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Rating:</label>
+              <!-- Rating Stars Box -->
+              <div class='rating-stars text-center'>
+                <ul id='stars'>
+                  <li class='star' title='Poor' name="rating" value="1">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Fair' name="rating" value="2">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Good' name="rating" value="3">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Excellent' name="rating" value="4">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='WOW!!!' name="rating" value="5">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Comment:</label>
+              <textarea class="form-control" id="comment"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary modal_submit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="Mentor_Eval" tabindex="-1" role="dialog" aria-labelledby="Edit Profile" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" >Rate Mentor</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Mentor:</label>
+              <select class="form-control" id="rated">
+                <option selected="selected" value="Nevaan Perera">Nevaan Perera</option>
+                <option value="Xuanming Cui">Xuanming Cui</option>
+                <option value="Yuexin Li">Yuexin Li</option>
+                <option value="Yuxi Zhang">Yuxi Zhang</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Rating:</label>
+              <div class='rating-stars text-center'>
+                <ul id='stars'>
+                  <li class='star' title='Poor' name="rating" value="1">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Fair' name="rating" value="2">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Good' name="rating" value="3">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='Excellent' name="rating" value="4">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                  <li class='star' title='WOW!!!' name="rating" value="5">
+                    <i class='fa fa-star fa-fw'></i>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Comment:</label>
+              <textarea class="form-control" id="comment"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary modal_submit">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="bg-dark fixed-bottom p-2">
+        <a href="/auth" id="log" class="text-white float-right">Log in with Google</a>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  <script>
+
+    // change log-in footer to logout if user is logged in
+    $.ajax({method: 'GET', url: '/user'})
+      .done(function(user) {
+        if (user) {
+          $('#log').attr('href', '/logout').text('Log out');
+      //    $('#new :input').prop('disabled', false);
+        }
+      });
+
+
+    $('.modal_submit').click(function(event){
+      event.preventDefault();
+      const modal = $(this).closest('.modal');
+      let rated = modal.find('#rated').val();
+      if (!$('#stars li.selected').last().val()){
+        alert("Please rate us:D");
+      }
+      if (!rated){
+        rated = 'QRC';
+        if (!$('#stars li.selected').last().val()){
+          alert("Please rate us:D");
+        }
+      }
+
+      const body = {
+        object:rated,
+        rating: $('#stars li.selected').last().val(),
+        comment: modal.find('#comment').val(),
+      };
+
+      console.log(body);
+
+      $.ajax({method:'POST', url:'/eval', data:body})
+        .done(function(response){
+          console.log(response);
+        });
+
+      modal.modal('toggle');
+
+    });
+
+    // Start rating widget
+    /* 1. Visualizing things on Hover - See next part for action on click */
+$('#stars li').on('mouseover', function(){
+  var onStar = parseInt($(this).val(), 10); // The star currently mouse on
+
+  // Now highlight all the stars that's not after the current hovered star
+  $(this).parent().children('li.star').each(function(e){
+    if (e < onStar) {
+      $(this).addClass('hover');
+    }
+    else {
+      $(this).removeClass('hover');
+    }
+  });
+
+}).on('mouseout', function(){
+  $(this).parent().children('li.star').each(function(e){
+    $(this).removeClass('hover');
+  });
+});
+
+
+/* 2. Action to perform on click */
+$('#stars li').on('click', function(){
+  var onStar = parseInt($(this).val(), 10); // The star currently selected
+  var stars = $(this).parent().children('li.star');
+
+  for (i = 0; i < stars.length; i++) {
+    $(stars[i]).removeClass('selected');
+  }
+
+  for (i = 0; i < onStar; i++) {
+    $(stars[i]).addClass('selected');
+  }
+});
+
+  </script>
+</body>
+
+
+</html>
